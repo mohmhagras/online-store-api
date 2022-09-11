@@ -31,6 +31,6 @@ const server = new ApolloServer({
     headers: ctx.req.headers,
   }),
 });
-server.listen().then(({ url }) => {
+server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`Graphql server is running at ${url}`);
 });
