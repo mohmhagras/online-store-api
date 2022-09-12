@@ -32,6 +32,9 @@ const server = new ApolloServer({
   }),
   playground: true,
   introspection: true,
+  cors: {
+    origin: "*", // <- allow request from all domains
+  },
 });
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`Graphql server is running at ${url}`);
