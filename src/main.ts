@@ -26,7 +26,7 @@ const schemaWithPermissions = applyMiddleware(
   permissions
 );
 const server = new ApolloServer({
-  schema: makeExecutableSchema({ typeDefs, resolvers }),
+  schema: schemaWithPermissions,
   context: (ctx) => ({
     headers: ctx.req.headers,
   }),
