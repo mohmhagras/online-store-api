@@ -1,0 +1,25 @@
+diff --git a/node_modules/mongoose/tsconfig.json b/node_modules/mongoose/tsconfig.json
+index 10f087f..18f033a 100644
+--- a/node_modules/mongoose/tsconfig.json
++++ b/node_modules/mongoose/tsconfig.json
+@@ -2,6 +2,7 @@
+   "compilerOptions": {
+     "strict": true,
+     "strictNullChecks": true,
++    "skipLibCheck": true,
+     "paths": {
+       "mongoose" : ["./types/index.d.ts"]
+     }
+diff --git a/node_modules/mongoose/types/query.d.ts b/node_modules/mongoose/types/query.d.ts
+index 33cafb6..3435f12 100644
+--- a/node_modules/mongoose/types/query.d.ts
++++ b/node_modules/mongoose/types/query.d.ts
+@@ -616,7 +616,7 @@ declare module 'mongoose' {
+     then: Promise<ResultType>['then'];
+ 
+     /** Converts this query to a customized, reusable query constructor with all arguments and options retained. */
+-    toConstructor(): typeof this;
++    toConstructor(): this;
+ 
+     /** Declare and/or execute this query as an update() operation. */
+     update(filter?: FilterQuery<DocType>, update?: UpdateQuery<DocType> | UpdateWithAggregationPipeline, options?: QueryOptions<DocType> | null, callback?: Callback<UpdateWriteOpResult>): QueryWithHelpers<UpdateWriteOpResult, DocType, THelpers, RawDocType>;
