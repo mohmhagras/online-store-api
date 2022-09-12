@@ -32,7 +32,7 @@ const makeOrderResolver = async (_parent: any, args: Args) => {
       address: address,
       country: country,
       items: items,
-      status: "Processing",
+      status: "processing",
       orderId: `ORD-${uid()}`,
       date: new Date().toLocaleDateString("en-US", {
         year: "numeric",
