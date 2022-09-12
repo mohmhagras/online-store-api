@@ -7,10 +7,22 @@ import connectDB from "./config/dbConnection";
 import mongoose from "mongoose";
 
 require("dotenv").config();
-
+const admins = [
+  {
+    email: "mohamed.hagras2002@gmail.com",
+    password: "onlinestoreadminpanel",
+  },
+];
 const isAuthenticated = rule({ cache: "contextual" })(
   async (parent, args, context, info) => {
-    return !!context.headers["email"];
+    const admin = admins.find((admin) => {
+      if (
+        admin.email === context.headers["email"] &&
+        admin.password === context.headers["password"]
+      )
+        return true;
+    });
+    return !!admin;
   }
 );
 
