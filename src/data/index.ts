@@ -52,7 +52,7 @@ export default async function getAllProducts() {
     );
     return products;
   } catch (error) {
-    console.log(error);
+    throw new Error(error.message);
   }
 }
 

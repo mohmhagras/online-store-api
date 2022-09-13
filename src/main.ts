@@ -2,9 +2,7 @@ import { ApolloServer, makeExecutableSchema } from "apollo-server";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
 import { applyMiddleware } from "graphql-middleware";
-import { shield, rule } from "graphql-shield";
-import connectDB from "./config/dbConnection";
-import mongoose from "mongoose";
+import { shield, rule, allow } from "graphql-shield";
 
 require("dotenv").config();
 const admins = [
@@ -29,8 +27,15 @@ const isAuthenticated = rule({ cache: "contextual" })(
 const permissions = shield({
   Query: {
     orders: isAuthenticated,
+    categories: allow,
+    currencies: allow,
+    product: allow,
+    category: allow,
   },
-  Mutation: {},
+  Mutation: {
+    makeOrder: allow,
+    updateOrderStatus: isAuthenticated,
+  },
 });
 
 const schemaWithPermissions = applyMiddleware(
