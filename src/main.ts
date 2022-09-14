@@ -3,6 +3,8 @@ import typeDefs from "./schema";
 import resolvers from "./resolvers";
 import { applyMiddleware } from "graphql-middleware";
 import { shield, rule, allow } from "graphql-shield";
+import connectDB from "./config/dbConnection";
+import mongoose from "mongoose";
 
 require("dotenv").config();
 const admins = [
@@ -53,6 +55,9 @@ const server = new ApolloServer({
     origin: "*", // <- allow request from all domains
   },
 });
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`Graphql server is running at ${url}`);
+connectDB();
+mongoose.connection.once("open", () => {
+  server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+    console.log(`Graphql server is running at ${url}`);
+  });
 });
