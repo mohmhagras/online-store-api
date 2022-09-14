@@ -45,14 +45,17 @@ const schemaWithPermissions = applyMiddleware(
   permissions
 );
 const server = new ApolloServer({
-  schema: schemaWithPermissions,
+  schema: makeExecutableSchema({ typeDefs, resolvers }),
   context: (ctx) => ({
     headers: ctx.req.headers,
   }),
   playground: true,
   introspection: true,
   cors: {
-    origin: "*", // <- allow request from all domains
+    origin: [
+      "https://online-store-client.vercel.app/",
+      "http://localhost:3000/",
+    ], // <- allow request from all domains
   },
 });
 connectDB();
