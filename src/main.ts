@@ -28,11 +28,11 @@ const isAuthenticated = rule({ cache: "contextual" })(
 
 const permissions = shield({
   Query: {
-    orders: isAuthenticated,
     categories: allow,
     currencies: allow,
     product: allow,
     category: allow,
+    orders: isAuthenticated,
   },
   Mutation: {
     makeOrder: allow,
