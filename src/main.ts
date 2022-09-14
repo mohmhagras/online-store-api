@@ -52,10 +52,7 @@ const server = new ApolloServer({
   playground: true,
   introspection: true,
   cors: {
-    origin: [
-      "https://online-store-client.vercel.app/",
-      "http://localhost:3000/",
-    ], // <- allow request from all domains
+    origin: "*", // <- allow request from all domains
   },
 });
 connectDB();
