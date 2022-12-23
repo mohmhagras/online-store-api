@@ -13,7 +13,6 @@ const categoryResolver = (_parent: any, args: Args): CategoryShape => {
   getAllProducts().then((list) => {
     products = list;
   });
-  console.log(products);
 
   const { input: { title } = {} } = args;
 
@@ -22,7 +21,9 @@ const categoryResolver = (_parent: any, args: Args): CategoryShape => {
   if (!title || title === Category.all) {
     result = products;
   } else {
-    result = products.filter((product) => product.getCategory() === title);
+    result = products.filter(
+      (product) => product.getCategory().toLowerCase() === title
+    );
   }
 
   if (!result.length) {
